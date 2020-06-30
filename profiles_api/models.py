@@ -5,10 +5,10 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class UserProfileManager(BaseUserManager):
-    """Manager for user profiles"""
+    """Manager for user profiles."""
 
     def create_user(self, email, name, password=None):
-        """Create a new user profile"""
+        """Create a new user profile."""
         if not email:
             raise ValueError('User must have an email address')
 
@@ -21,7 +21,7 @@ class UserProfileManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, name, password):
-        """Create and save new super user with details"""
+        """Create and save new super user with details."""
         user = self.create_user(email, name, password)
 
         user.is_superuser = True
@@ -31,9 +31,9 @@ class UserProfileManager(BaseUserManager):
         return user
 
 
-
 class UserProfile(AbstractBaseUser, PermissionsMixin):
-    """Database model for users in the system"""
+    """Database model for users in the system."""
+
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
@@ -45,13 +45,13 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name']
 
     def get_full_name(self):
-        """Retrieve full name of user"""
+        """Retrieve full name of user."""
         return self.name
 
     def get_short_name(self):
-        """Retrieve short name of user"""
+        """Retrieve short name of user."""
         return self.name
 
     def __str__(self):
-        """Return string representation of user"""
+        """Return string representation of user."""
         return self.email
